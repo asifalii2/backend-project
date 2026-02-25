@@ -15,7 +15,7 @@ jobs:
     - name: Setup .NET
       uses: actions/setup-dotnet@v4
       with:
-        dotnet-version: '10.0.x' # Check if you use 8.0.x or 9.0.x in your csproj
+        dotnet-version: '10.0.x' # Or '10.0.x' since your logs showed .NET 10!
 
     - name: Restore and Build
       run: |
@@ -23,14 +23,14 @@ jobs:
         dotnet build --configuration Release --no-restore
 
     - name: Publish API
-      run: dotnet publish -c Release -o ./publish --runtime win-x86 --self-contained false
+      # Using the path to your .csproj from your logs
+      run: dotnet publish ./api-pipelining-practice-project/api-pipelining-practice-project.csproj -c Release -o ./publish --runtime win-x86 --self-contained false
 
-    - name: Deploy via WebDeploy
-      # This is a more stable action for 2026 WebDeployments
+    - name: Deploy to MonsterASP.NET via WebDeploy
       uses: rasmusbuchholdt/simply-web-deploy@main
       with:
-        server-computer-name: ${{ secrets.SERVER_COMPUTER_NAME }}
         website-name: ${{ secrets.WEBSITE_NAME }}
+        server-computer-name: ${{ secrets.SERVER_COMPUTER_NAME }}
         server-username: ${{ secrets.SERVER_USERNAME }}
         server-password: ${{ secrets.SERVER_PASSWORD }}
-        source-path: ./publish
+        source-path: ./publish/
