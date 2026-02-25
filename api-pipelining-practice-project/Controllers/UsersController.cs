@@ -6,6 +6,7 @@ namespace api_pipelining_practice_project.Controllers
     [Route("api/[controller]")]
     public class UsersController : Controller
     {
+        [HttpGet]
         public IActionResult Index()
         {
             var user = new
