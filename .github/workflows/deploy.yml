@@ -26,7 +26,7 @@ jobs:
       run: dotnet publish -c Release -o ./publish --runtime win-x86 --self-contained false
 
     - name: Deploy via WebDeploy
-      uses: rasmusbuchholdt/simply-web-deploy@v2.1.0
+      uses: rasmusbuchholdt/simply-web-deploy@v2.2.0
       with:
         website-name: ${{ secrets.WEBSITE_NAME }}
         server-computer-name: ${{ secrets.SERVER_COMPUTER_NAME }}
