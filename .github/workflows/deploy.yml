@@ -27,7 +27,7 @@ jobs:
 
     - name: Deploy via WebDeploy
       # This is a more stable action for 2026 WebDeployments
-      uses: aarhusit/deploy@v1
+      uses: rasmusbuchholdt/simply-web-deploy@main
       with:
         server-computer-name: ${{ secrets.SERVER_COMPUTER_NAME }}
         website-name: ${{ secrets.WEBSITE_NAME }}
