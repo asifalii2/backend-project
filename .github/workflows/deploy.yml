@@ -27,7 +27,7 @@ jobs:
       run: dotnet publish ./api-pipelining-practice-project/api-pipelining-practice-project.csproj -c Release -o ./publish --runtime win-x86 --self-contained false
 
     - name: Deploy to MonsterASP.NET via WebDeploy
-      uses: rasmusbuchholdt/simply-web-deploy@v2.2.0
+      uses: rasmusbuchholdt/simply-web-deploy@main
       with:
         website-name: ${{ secrets.WEBSITE_NAME }}
         server-computer-name: ${{ secrets.SERVER_COMPUTER_NAME }}
