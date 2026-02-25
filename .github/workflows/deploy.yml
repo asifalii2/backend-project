@@ -2,11 +2,11 @@ name: Build and Deploy to MonsterASP
 
 on:
   push:
-    branches: [ "development" ] # Runs every time you push to the main branch
+    branches: [ "development" ]
 
 jobs:
   build-and-deploy:
-    runs-on: windows-latest # Required because WebDeploy is a Windows tool
+    runs-on: windows-latest
 
     steps:
     - name: Checkout Code
@@ -15,7 +15,7 @@ jobs:
     - name: Setup .NET
       uses: actions/setup-dotnet@v4
       with:
-        dotnet-version: '10.0.x' # Or '8.0.x' depending on your project
+        dotnet-version: '10.0.x' # Check if you use 8.0.x or 9.0.x in your csproj
 
     - name: Restore and Build
       run: |
@@ -26,10 +26,11 @@ jobs:
       run: dotnet publish -c Release -o ./publish --runtime win-x86 --self-contained false
 
     - name: Deploy via WebDeploy
-      uses: rasmusbuchholdt/simply-web-deploy@v2.2.0
+      # This is a more stable action for 2026 WebDeployments
+      uses: aarhusit/deploy@v1
       with:
-        website-name: ${{ secrets.WEBSITE_NAME }}
         server-computer-name: ${{ secrets.SERVER_COMPUTER_NAME }}
+        website-name: ${{ secrets.WEBSITE_NAME }}
         server-username: ${{ secrets.SERVER_USERNAME }}
         server-password: ${{ secrets.SERVER_PASSWORD }}
         source-path: ./publish
