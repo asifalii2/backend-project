@@ -1,0 +1,35 @@
+name: Build and Deploy to MonsterASP
+
+on:
+  push:
+    branches: [ "development" ] # Runs every time you push to the main branch
+
+jobs:
+  build-and-deploy:
+    runs-on: windows-latest # Required because WebDeploy is a Windows tool
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v4
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '10.0.x' # Or '8.0.x' depending on your project
+
+    - name: Restore and Build
+      run: |
+        dotnet restore
+        dotnet build --configuration Release --no-restore
+
+    - name: Publish API
+      run: dotnet publish -c Release -o ./publish --runtime win-x86 --self-contained false
+
+    - name: Deploy via WebDeploy
+      uses: rasmusbuchholdt/simply-web-deploy@v2.1.0
+      with:
+        website-name: ${{ secrets.WEBSITE_NAME }}
+        server-computer-name: ${{ secrets.SERVER_COMPUTER_NAME }}
+        server-username: ${{ secrets.SERVER_USERNAME }}
+        server-password: ${{ secrets.SERVER_PASSWORD }}
+        source-path: ./publish
