@@ -33,5 +33,7 @@ jobs:
         -source:contentPath="%CD%\publish" ^
         -dest:contentPath="site56641",computerName="${{ secrets.SERVER_COMPUTER_NAME }}",userName="site56641",password="${{ secrets.SERVER_PASSWORD }}",authtype="Basic",includeAcls="False" ^
         -allowUntrusted ^
-        -retryAttempts:2 ^
+        -enableRule:AppOffline ^
+        -retryAttempts:5 ^
+        -retryInterval:3000 ^
         -verbose
