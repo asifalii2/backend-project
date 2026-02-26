@@ -31,6 +31,6 @@ jobs:
       with:
         website-name: 'site56641'
         server-computer-name: ${{ secrets.SERVER_COMPUTER_NAME }}
-        server-username: 'site56641'
+        server-username: 'site56641\site56641'
         server-password: ${{ secrets.SERVER_PASSWORD }}
         source-path: ./publish/
