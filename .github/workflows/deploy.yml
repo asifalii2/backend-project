@@ -34,5 +34,5 @@ jobs:
         server-computer-name: 'https://site56641.siteasp.net:8172/msdeploy.axd?site=site56641'
         server-username: 'site56641'
         # Hardcoded password from your successful Visual Studio publish
-        server-password: 'aS%46#nHCq8_'
+        server-password: 'Password1234'
         source-path: ./publish/
