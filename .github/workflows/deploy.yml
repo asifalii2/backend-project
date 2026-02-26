@@ -1,8 +1,8 @@
-name: Build Backend and Deploy to MonsterASP
+name: Build and Deploy to MonsterASP
 
 on:
   push:
-    branches: [ "development" ]
+    branches: [ "development" ] # Updated to match your screenshot
 
 jobs:
   build-and-deploy:
@@ -15,7 +15,7 @@ jobs:
     - name: Setup .NET
       uses: actions/setup-dotnet@v4
       with:
-        dotnet-version: '10.0.x' # Updated to match your logs
+        dotnet-version: '10.0.x'
 
     - name: Restore and Build
       run: |
@@ -23,14 +23,14 @@ jobs:
         dotnet build --configuration Release --no-restore
 
     - name: Publish API
-      # Correct path from your previous log
+      # Using the path to your .csproj
       run: dotnet publish ./api-pipelining-practice-project/api-pipelining-practice-project.csproj -c Release -o ./publish --runtime win-x86 --self-contained false
 
-    - name: Deploy to MonsterASP.NET via WebDeploy
+    - name: Deploy via WebDeploy
       uses: rasmusbuchholdt/simply-web-deploy@main
       with:
-        website-name: ${{ secrets.WEBSITE_NAME }}
+        website-name: 'site56641'
         server-computer-name: ${{ secrets.SERVER_COMPUTER_NAME }}
-        server-username: ${{ secrets.SERVER_USERNAME }}
+        server-username: 'site56641'
         server-password: ${{ secrets.SERVER_PASSWORD }}
         source-path: ./publish/
