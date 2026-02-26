@@ -18,5 +18,11 @@ namespace api_pipelining_practice_project.Controllers
 
             return Ok(user);
         }
+
+        [HttpGet("add-user")]
+        public IActionResult AddUserAsync()
+        {
+            return Ok(new {Message="User Added Successfully"});
+        }
     }
 }

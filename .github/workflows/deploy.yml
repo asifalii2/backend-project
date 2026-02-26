@@ -31,7 +31,7 @@ jobs:
         "C:\Program Files\iis\Microsoft Web Deploy V3\msdeploy.exe" ^
         -verb:sync ^
         -source:contentPath="%CD%\publish" ^
-        -dest:contentPath="site56641",computerName="https://site56641.siteasp.net:8172/msdeploy.axd?site=site56641",userName="site56641",password="Password1234",authtype="Basic",includeAcls="False" ^
+        -dest:contentPath="site56641",computerName="${{ secrets.SERVER_COMPUTER_NAME }}",userName="site56641",password="${{ secrets.SERVER_PASSWORD }}",authtype="Basic",includeAcls="False" ^
         -allowUntrusted ^
         -retryAttempts:2 ^
         -verbose
